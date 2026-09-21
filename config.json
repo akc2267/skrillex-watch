@@ -4,6 +4,7 @@
       "name": "skrillex",
       "sitemap": "https://skrillex.com/sitemap.xml",
       "skip_sitemaps": ["agentic_discovery"],
+      "lastmod_watch": ["pages"],
       "probe_paths": []
     }
   ]

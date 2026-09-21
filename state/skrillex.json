@@ -1,0 +1,121 @@
+{
+  "consecutive_failures": 0,
+  "last_success_date": "2026-09-21",
+  "sections": {
+    "sitemap_blogs_1.xml": {
+      "https://skrillex.com/blogs/news": {
+        "first_seen": "2026-09-21"
+      }
+    },
+    "sitemap_collections_1.xml": {
+      "https://skrillex.com/collections/classics": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/collections/fus": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/collections/gasworks": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/collections/kora": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/collections/navypier": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/collections/swsg": {
+        "first_seen": "2026-09-21"
+      }
+    },
+    "sitemap_pages_1.xml": {
+      "https://skrillex.com/pages/apa-nzpa": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:24-08:00"
+      },
+      "https://skrillex.com/pages/appi": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:28-08:00"
+      },
+      "https://skrillex.com/pages/canadian-laws-compliance": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:29:14-08:00"
+      },
+      "https://skrillex.com/pages/chicago26": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2026-09-08T09:41:20-07:00"
+      },
+      "https://skrillex.com/pages/contact": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2026-01-14T18:11:16-08:00"
+      },
+      "https://skrillex.com/pages/do-not-sell-or-share-my-personal-information": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T15:21:13-08:00"
+      },
+      "https://skrillex.com/pages/gdpr": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:21-08:00"
+      },
+      "https://skrillex.com/pages/home": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2019-01-15T01:49:22-08:00"
+      },
+      "https://skrillex.com/pages/lgpd": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:26-08:00"
+      },
+      "https://skrillex.com/pages/media": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2018-11-16T13:53:44-08:00"
+      },
+      "https://skrillex.com/pages/pdpa": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:30-08:00"
+      },
+      "https://skrillex.com/pages/popia": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:42:31-08:00"
+      },
+      "https://skrillex.com/pages/privacy-policy": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-19T18:35:25-08:00"
+      },
+      "https://skrillex.com/pages/terms-of-use": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-19T18:35:14-08:00"
+      },
+      "https://skrillex.com/pages/tour": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2018-11-16T13:51:13-08:00"
+      },
+      "https://skrillex.com/pages/us-laws-compliance": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-14T17:29:09-08:00"
+      },
+      "https://skrillex.com/pages/your-privacy-choices": {
+        "first_seen": "2026-09-21",
+        "lastmod": "2025-11-19T19:38:59-08:00"
+      }
+    },
+    "sitemap_products_1.xml": {
+      "https://skrillex.com/": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/products/classic-hoodie": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/products/classic-logo-tee": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/products/classic-longsleeve": {
+        "first_seen": "2026-09-21"
+      },
+      "https://skrillex.com/products/f-uck-u-skrillex-vinyl": {
+        "first_seen": "2026-09-21"
+      }
+    }
+  },
+  "site": "skrillex",
+  "sitemap": "https://skrillex.com/sitemap.xml",
+  "watching_since": "2026-09-21"
+}

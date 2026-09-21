@@ -1,0 +1,91 @@
+name: watch
+
+on:
+  schedule:
+    # Off-peak minutes: GitHub's scheduler is heavily congested at :00 and
+    # drops/delays runs there, so we ask for quarter-hours nudged off the hour.
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "Only check this site name from config.json (blank = all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write   # commit the URL inventory
+  issues: write     # open the alert issue
+
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check sitemaps
+        id: check
+        run: python3 watch.py ${{ inputs.site }}
+
+      # --- alerts -------------------------------------------------------
+      - name: Open issue
+        if: steps.check.outputs.alert == 'true' || steps.check.outputs.blocked == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ steps.check.outputs.title }}
+          BLOCKED: ${{ steps.check.outputs.blocked }}
+        run: |
+          label=new-page
+          [ "$BLOCKED" = "true" ] && label=blocked
+          gh label create "$label" --color FF4444 --force >/dev/null 2>&1 || true
+          gh issue create --title "$TITLE" --body-file report.md --label "$label"
+
+      - name: Push notification (ntfy)
+        if: steps.check.outputs.alert == 'true' && env.NTFY_TOPIC != ''
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TITLE: ${{ steps.check.outputs.title }}
+          ISSUES_URL: ${{ github.server_url }}/${{ github.repository }}/issues
+        run: |
+          curl -fsS \
+            -H "Title: $TITLE" \
+            -H "Priority: urgent" \
+            -H "Tags: rotating_light" \
+            -d "$TITLE - $ISSUES_URL" \
+            "https://ntfy.sh/${NTFY_TOPIC}"
+
+      - name: Push notification (Discord)
+        if: steps.check.outputs.alert == 'true' && env.DISCORD_WEBHOOK != ''
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          TITLE: ${{ steps.check.outputs.title }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          payload = json.dumps({
+              "content": "**%s**\n%s" % (os.environ["TITLE"], open("report.md").read()[:1800])
+          }).encode()
+          urllib.request.urlopen(urllib.request.Request(
+              os.environ["DISCORD_WEBHOOK"], data=payload,
+              headers={"Content-Type": "application/json"}), timeout=30)
+          PY
+
+      # --- persist ------------------------------------------------------
+      - name: Commit inventory
+        run: |
+          if [ -z "$(git status --porcelain state/)" ]; then
+            echo "no inventory change"; exit 0
+          fi
+          git config user.name  "sitemap-watcher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/
+          git commit -m "state: $(date -u +%F) inventory update"
+          for i in 1 2 3; do
+            git pull --rebase --autostash && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

@@ -1,0 +1,10 @@
+{
+  "sites": [
+    {
+      "name": "skrillex",
+      "sitemap": "https://skrillex.com/sitemap.xml",
+      "skip_sitemaps": ["agentic_discovery"],
+      "probe_paths": []
+    }
+  ]
+}

@@ -38,11 +38,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TITLE: ${{ steps.check.outputs.title }}
           BLOCKED: ${{ steps.check.outputs.blocked }}
+          ASSIGNEE: ${{ github.repository_owner }}
         run: |
           label=new-page
           [ "$BLOCKED" = "true" ] && label=blocked
           gh label create "$label" --color FF4444 --force >/dev/null 2>&1 || true
-          gh issue create --title "$TITLE" --body-file report.md --label "$label"
+          # Assign the owner: "participating" notifications have email enabled by
+          # default, whereas "watching" ones do not. Without this the alert lands
+          # silently in the web inbox and no email is ever sent.
+          gh issue create --title "$TITLE" --body-file report.md --label "$label" \
+            --assignee "$ASSIGNEE"
 
       - name: Push notification (ntfy)
         if: steps.check.outputs.alert == 'true' && env.NTFY_TOPIC != ''
